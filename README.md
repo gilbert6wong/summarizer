@@ -34,7 +34,7 @@ The TextRank algorithm was able to acheive a ROUGE-2 (F1) score of over 50 which
 
 
 
-## R2 Scores
+## ROUGE-2 Scores
 | Extractive                       | ROUGE-2 (F1)   |
 |----------------------------------|----------------|
 | TextRank                         | 50.31    |
