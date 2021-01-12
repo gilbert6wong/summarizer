@@ -1,8 +1,12 @@
+
+# import libraries
 import streamlit as st
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import networkx as nx
+
 import re
 import nltk
 nltk.download('punkt')
@@ -46,6 +50,7 @@ contraction_mapping = {"ain't": "is not", "aren't": "are not","can't": "cannot",
                         "you'd": "you would", "you'd've": "you would have", "you'll": "you will", 
                         "you'll've": "you will have", "you're": "you are", "you've": "you have"}
 
+# create helper functions
 
 def summarize(ranked_sentences, length):
     summary = ""
@@ -54,13 +59,11 @@ def summarize(ranked_sentences, length):
 
     return summary
 
-
 def rank(text, scores):
     ranked_sentences = sorted(((scores[i],s) for i,s in enumerate(text)), reverse=True)
     ranked = ranked_sentences
         
     return ranked
-
 
 def glove(cleaned_text):
     glove_vectors = []
@@ -74,7 +77,6 @@ def glove(cleaned_text):
         
     return glove_vectors
 
-
 def clean(text):
     cleaned = []
     for y in text:
@@ -82,14 +84,12 @@ def clean(text):
         
     return cleaned
 
-
 def ready(text):
     cleaned = []
     for x in text:
         cleaned.append(s_cleaner(x))
         
     return cleaned
-
 
 def s_cleaner(text): 
     final_string=[]
@@ -101,7 +101,6 @@ def s_cleaner(text):
         final_string.append(new_string)
 
     return new_string
-
 
 def h_cleaner(text):   
     new_string = text.lower()
@@ -115,13 +114,15 @@ def h_cleaner(text):
 
     return new_string
 
-# APP
+# streamlit app
 
 try:
 
+    # title
     st.title('Text Summarizer')
     text = st.text_area("Input Text")
 
+    # text preprocessing
     sentences = sent_tokenize(text)
 
     r = ready(sentences)
@@ -135,10 +136,9 @@ try:
             coefs = np.fromstring(coefs, "f", sep=" ")
             word_embeddings[word] = coefs
 
-    print("Found %s word vectors." % len(word_embeddings))
-
     g = glove(c)
 
+    # 1. intermediate representation
     sim_mat=np.zeros([len(g), len(g)])
 
     for y in range(len(g)):
@@ -150,10 +150,13 @@ try:
     nx_graph = nx.from_numpy_array(sim_mat)
     pagerank_scores = nx.pagerank_numpy(nx_graph)
 
+    # 2. rank sentences
     textranked = rank(r, pagerank_scores)
 
+    # 3. sort by rank
     textrank_summary = summarize(textranked, 3)
 
+    # display summary
     if text:
         st.write(textrank_summary)
         
