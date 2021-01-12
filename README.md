@@ -37,9 +37,9 @@ The TextRank algorithm was able to acheive a ROUGE-2 (F1) score of over 50 which
 ## ROUGE-2 Scores
 | Extractive                       | ROUGE-2 (F1)   |
 |----------------------------------|----------------|
-| TextRank                         | 50.31    |
+| TextRank                         | 57.73    |
 | Latent Semantic Indexing         | 33.33          |
-| TF-IDF                           | 26.01          |
+| TF-IDF                           | 1.20         |
 | Naive Bayes                      | 32.26          |
 
 
