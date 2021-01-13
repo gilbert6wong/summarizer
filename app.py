@@ -50,7 +50,7 @@ contraction_mapping = {"ain't": "is not", "aren't": "are not","can't": "cannot",
                         "you'd": "you would", "you'd've": "you would have", "you'll": "you will", 
                         "you'll've": "you will have", "you're": "you are", "you've": "you have"}
 
-# create helper functions
+# create functions
 
 def summarize(ranked_sentences, length):
     summary = ""
