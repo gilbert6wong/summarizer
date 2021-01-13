@@ -1,0 +1,9 @@
+.DS_Store
+.vscode/
+*.pyc
+data/
+glove/
+.ipynb_checkpoints/
+capstone/
+venv
+
