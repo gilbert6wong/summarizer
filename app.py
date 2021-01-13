@@ -136,10 +136,6 @@ try:
             coefs = np.fromstring(coefs, "f", sep=" ")
             word_embeddings[word] = coefs
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5a0f5da0d9a6626c1403fae639a0dbee595d81ae
     g = glove(c)
 
     # 1. intermediate representation
